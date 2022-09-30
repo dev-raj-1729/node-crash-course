@@ -5,7 +5,16 @@ const server = http.createServer((req,res)=>{
     console.log('request made');
     res.setHeader('Content-Type','text/html');
     
-    path = './views/index.html';
+    path = './views/';
+
+    switch(req.url){
+        case '/':
+            path += 'index.html';
+            break;
+        default:
+            path += '404.html';
+            break;
+    }
 
     fs.readFile(path,(err,data)=>{
         if (err) {
