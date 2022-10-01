@@ -3,6 +3,8 @@ const path = require('path');
 const morgan = require('morgan');
 
 const app = express();
+const mongoUri = 'mongodb+srv://admin:admin@blogs.dvnw4ff.mongodb.net/?retryWrites=true&w=majority';
+
 
 app.listen(3000);
 
