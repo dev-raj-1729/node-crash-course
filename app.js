@@ -6,6 +6,7 @@ const app = express();
 
 app.listen(3000);
 
+app.use(express.static('public'));
 app.use(morgan('dev'));
 
 app.set('view engine','ejs');
