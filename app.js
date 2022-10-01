@@ -6,6 +6,8 @@ const app = express();
 
 app.listen(3000);
 
+app.set('view engine','ejs');
+
 app.get('/',(req,res)=>{
     res.sendFile(path.resolve('./views/index.html'));
 })
