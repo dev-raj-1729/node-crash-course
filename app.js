@@ -1,12 +1,15 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 const app = express();
 const mongoUri = 'mongodb+srv://admin:admin@blogs.dvnw4ff.mongodb.net/?retryWrites=true&w=majority';
 
 
-app.listen(3000);
+mongoose.connect(mongoUri,{useNewUrlParser:true, useUnifiedTopology: true})
+.then((result)=>app.listen(3000))
+.catch((err)=>console.log(err));
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
