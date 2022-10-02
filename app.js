@@ -30,11 +30,13 @@ app.get('/about',(req,res)=> {
 
 
 app.get('/blogs',(req,res)=> {
-    Blog.find((blogs)=>{
-        res.render('index',{title: 'Home',blogs});
-    }).catch((err)=>{
-        console.log(err);
+    Blog.find()
+    .then((blogs)=>{
+        res.render('index',{title:'Home',blogs});
     })
+    .catch((err)=>{
+        console.log(err);
+    });
 })
 
 app.post('/blogs',(req,res)=>{
@@ -44,7 +46,7 @@ app.post('/blogs',(req,res)=>{
     })
     .catch((err)=>{
         console.log(err);
-    })
+    });
 })
 
 app.get('/blogs/create',(req,res)=> {
