@@ -15,18 +15,12 @@ mongoose.connect(mongoUri,{useNewUrlParser:true, useUnifiedTopology: true})
 .catch((err)=>console.log(err));
 
 app.use(express.static('public'));
+app.use(express.urlencoded({extended:true}));
 app.use(morgan('dev'));
 
 app.set('view engine','ejs');
 
 app.get('/',(req,res)=>{
-    // const blogs = [
-    //     {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-    //     {title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-    //     {title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-    //   ];
-
-    // res.render('index',{title:'Home',blogs});
     res.redirect('/blogs');
 })
 
@@ -39,6 +33,16 @@ app.get('/blogs',(req,res)=> {
     Blog.find((blogs)=>{
         res.render('index',{title: 'Home',blogs});
     }).catch((err)=>{
+        console.log(err);
+    })
+})
+
+app.post('/blogs',(req,res)=>{
+    const blog = new Blog(req.body);
+    blog.save().then((result)=>{
+        res.redirect('/blogs');
+    })
+    .catch((err)=>{
         console.log(err);
     })
 })
