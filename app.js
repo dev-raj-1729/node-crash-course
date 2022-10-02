@@ -53,6 +53,13 @@ app.get('/blogs/create',(req,res)=> {
     res.render('create',{title:'New Blog'});
 })
 
+app.get('/blogs/:id',(req,res)=>{
+    Blog.findById(req.params.id)
+    .then((blog)=>{
+        res.render('details',{title:'Details',blog});
+    });
+})
+
 app.use((req,res)=> {
     res.status(404).render('404',{title:'404 Page Not Found'});
 })
